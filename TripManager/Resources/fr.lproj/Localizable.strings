@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  TripManager
+
+  Created by eric locci on 08/12/2025.
+  
+*/
+"tab.home" = "Découverte";
+"tab.mytrips" = "Mes voyages";
+"onboarding.button.next" = "Suivant";
+"onboarding.button.skip" = "Passer";
+"onboarding.button.start" = "Commencer";
+"onboarding.step.1.description" = "Gérez vos vacances avec DimaTrip";
+"onboarding.step.1.title" = "Découvrir";
+"onboarding.step.2.description" = "Sélectionnez des destinations 
+et commencez à planifier votre voyage.";
+"onboarding.step.2.title" = "Planifiez votre voyage";
+"onboarding.step.3.description" = "Profitez ! Détente et souvenirs 
+inoubliables.";
+"onboarding.step.3.title" = "Commencez votre aventure";
+"text.sample.description" = "Exemple de texte";
+"text.sample.n.quantity|==|plural.one" = "Texte complexe %d élément";
+"text.sample.n.quantity|==|plural.other" = "Texte complexe %d éléments";
+"error.image.unavailable" = "Image indisponible";
+"cityActivities.date.picker" = "Sélectionner une date";
+"cityActivities.price" = "Prix total pour la journée";
+"cityActivities.title" = "Créer un voyage";
+"cityActivities.button.create" = "Créer";
+"myTrips.title" = "Mes voyages";
+"myTrips.past.section.title" = "Voyages passés";
+"myTrips.future.section.title" = "Voyages futurs";
+"myTrips.future.section.empty" = "Aucun voyage prévu";
+"myTrips.past.section.empty" = "Aucun voyage passé";

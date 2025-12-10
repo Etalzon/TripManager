@@ -1,0 +1,43 @@
+//  MapView.swift
+//  TripManager
+//
+//  Created by eric locci on 08/12/2025.
+
+import SwiftUI
+import UIKit
+import MapKit
+import RswiftResources
+
+protocol MapViewDelegate: MKMapViewDelegate {
+  func annotations() -> [MapItem]
+}
+
+struct MapView: UIViewRepresentable {
+  weak var delegate: MapViewDelegate?
+  let view = MKMapView(frame: .zero)
+
+  func makeUIView(context: Context) -> MKMapView {
+    view
+  }
+
+  func updateUIView(_ view: MKMapView, context: Context) {
+    let annotations = delegate?.annotations() ?? []
+    view.delegate = delegate
+    view.addAnnotations(annotations)
+    if let firstCenter = annotations.first {
+      center(at: firstCenter.coordinate)
+    }
+    view.showsUserLocation = true
+    view.userTrackingMode = .follow
+    view.register(PinAnnotationView.self,
+                  forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    view.register(ClusterAnnotationView.self,
+                  forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+  }
+
+  func center(at coordinate: CLLocationCoordinate2D, zoomValue: CGFloat = 0.05) {
+    let span = MKCoordinateSpan(latitudeDelta: zoomValue, longitudeDelta: zoomValue)
+    let region = MKCoordinateRegion(center: coordinate, span: span)
+    view.setRegion(region, animated: true)
+  }
+}
