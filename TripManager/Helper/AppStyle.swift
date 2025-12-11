@@ -1,11 +1,12 @@
+//
 //  AppStyle.swift
 //  TripManager
 //
 //  Created by eric locci on 08/12/2025.
 
+import RswiftResources
 import Foundation
 import SwiftUI
-import RswiftResources
 
 struct AppStyles {
 

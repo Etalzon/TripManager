@@ -1,13 +1,16 @@
+//
 //  MyTripsMapView.swift
 //  TripManager
 //
 //  Created by eric locci on 08/12/2025.
 
 import SwiftUI
-internal import CoreLocation
 import RswiftResources
+internal import CoreLocation
 
 struct MyTripsMapView: View {
+   @Environment(\.dismiss)
+   var dismiss
   @State var viewModel: MyTripsMapViewModel
   @State var mapView: MapView
 
@@ -24,35 +27,38 @@ struct MyTripsMapView: View {
 
    var body: some View {
        GeometryReader { geo in
-         ZStack(alignment: .bottomTrailing) {
-           mapView
-             .frame(maxWidth: .infinity, maxHeight: .infinity)
-             .ignoresSafeArea()
-           if viewModel.hasAccessToLocation {
-             centerOnUserButton()
-               .offset(
-                 x: -AppStyles.Padding.medium24.rawValue,
-                 y: viewModel.selectedAnnotation != nil
-                   ? -(AppStyles.Padding.medium24.rawValue + geo.size.height * ViewStyles.activitySheetHeight)
-                   : -AppStyles.Padding.medium24.rawValue
-               )
-           }
-         }
+          ZStack(alignment: .topLeading) {
+             ZStack(alignment: .bottomTrailing) {
+                mapView
+                   .frame(maxWidth: .infinity, maxHeight: .infinity)
+                   .ignoresSafeArea()
+                if viewModel.hasAccessToLocation {
+                   centerOnUserButton()
+                      .offset(
+                        x: -AppStyles.Padding.medium24.rawValue,
+                        y: viewModel.selectedAnnotation != nil
+                        ? -(AppStyles.Padding.medium24.rawValue + geo.size.height * ViewStyles.activitySheetHeight)
+                        : -AppStyles.Padding.medium24.rawValue)
+                }
+             }
+             backButton()
+                .offset(
+                  x: AppStyles.Padding.medium24.rawValue,
+                  y: AppStyles.Padding.medium24.rawValue)
+            }
        }
 
-    .sheet(
-      isPresented: Binding(get: {
-        viewModel.selectedAnnotation != nil
-      }, set: { _ in }),
-      content: {
+       .toolbar(.hidden, for: .navigationBar)
+    .sheet(isPresented: Binding(get: {
+      viewModel.selectedAnnotation != nil
+    }, set: { _ in }), content: {
         if let item = viewModel.selectedAnnotation?.annotation as? MapItem {
           selectedAnnotationView(item)
             .interactiveDismissDisabled()
             .presentationDetents([.fraction(ViewStyles.activitySheetHeight)])
             .presentationBackgroundInteraction(.enabled(upThrough: .fraction(ViewStyles.activitySheetHeight)))
         }
-      }
-    )
+    })
 
     .onChange(of: viewModel.selectedAnnotation) { _, newValue in
       if let selectedAnnotation = newValue?.annotation as? MapItem {
@@ -61,20 +67,28 @@ struct MyTripsMapView: View {
     }
   }
 
+   @ViewBuilder
+   func backButton() -> some View {
+      Button {
+      dismiss()
+      } label: {
+         Image(systemName: "chevron.backward.circle.fill")
+            .symbolRenderingMode(.palette)
+            .foregroundStyle(Color(uiColor: .systemBlue), Color.white)
+            .font(.system(size: ViewStyles.buttonSize))
+      }
+   }
+
   @ViewBuilder
   func selectedAnnotationView(_ mapItem: MapItem) -> some View {
     VStack {
       mapItem.item.name.textView(style: .title, multiligneAlignment: .center)
-      PriceTextField(
-        currencySymbol: "€",
-        placeholder: R.string.localizable.cityActivitiesPrice(),
-        value: .constant(mapItem.item.price)
-      )
-      .font(AppStyles.TextStyles.description.font)
-      .multilineTextAlignment(.trailing)
-      .disabled(true)
-    }
-    .padding(.horizontal, AppStyles.Padding.medium24.rawValue)
+      PriceTextField(currencySymbol: "€", placeholder: R.string.localizable.cityActivitiesPrice(),
+                     value: .constant(mapItem.item.price))
+        .font(AppStyles.TextStyles.description.font)
+        .multilineTextAlignment(.trailing)
+        .disabled(true)
+    }.padding(.horizontal, AppStyles.Padding.medium24.rawValue)
   }
 
   @ViewBuilder
@@ -93,5 +107,5 @@ struct MyTripsMapView: View {
 }
 
 #Preview {
-  MyTripsMapView()
+    MyTripsMapView()
 }

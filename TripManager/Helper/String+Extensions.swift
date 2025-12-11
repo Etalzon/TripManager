@@ -1,3 +1,4 @@
+//
 //  String+Extensions.swift
 //  TripManager
 //

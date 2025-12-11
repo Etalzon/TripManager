@@ -1,15 +1,13 @@
 //
 //  TripManagerUITestsLaunchTests.swift
 //  TripManagerUITests
-//
 //  Created by eric locci on 08/12/2025.
-//
 
 import XCTest
 
-final class TripManagerUITestsLaunchTests: XCTestCase {
+class TripManagerUITestsLaunchTests: XCTestCase {
 
-    override static var runsForEachTargetApplicationUIConfiguration: Bool {
+    override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
 
@@ -17,7 +15,6 @@ final class TripManagerUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()

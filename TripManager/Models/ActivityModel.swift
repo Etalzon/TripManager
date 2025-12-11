@@ -1,4 +1,7 @@
 //
+//  ActivityModel.swift
+//  TripManager
+//
 //  Created by eric locci on 08/12/2025.
 
 internal import CoreLocation
@@ -12,7 +15,7 @@ struct LocationActivity: Equatable {
    var address: String?
    var longitude: CLLocationDegrees?
    var latitude: CLLocationDegrees?
-   
+
    init(address: String? = nil, longitude: CLLocationDegrees? = nil, latitude: CLLocationDegrees? = nil) {
       self.address = address
       self.longitude = longitude
@@ -28,7 +31,7 @@ struct ActivityModel: Equatable {
    var price: Double
    var status: ActivityStatus
    var location: LocationActivity?
-   
+
    init(name: String, city: String, image: String, price: Double,
         status: ActivityStatus = .ongoing, location: LocationActivity? = nil) {
       self.name = name
@@ -38,7 +41,7 @@ struct ActivityModel: Equatable {
       self.status = status
       self.location = location
    }
-   
+
    // swiftlint:disable function_body_length
    static func sampleValues() -> [ActivityModel] {
       [
@@ -136,5 +139,5 @@ struct ActivityModel: Equatable {
       ]
    }
    // swiftlint:enable function_body_length
-   
+
 }

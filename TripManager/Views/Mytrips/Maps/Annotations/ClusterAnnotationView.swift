@@ -1,10 +1,12 @@
+//
+//  ClusterAnnotationView.swift
 //  TripManager
 //
 //  Created by eric locci on 08/12/2025.
 
-import MapKit
 import RswiftResources
 import UIKit
+import MapKit
 
 class ClusterAnnotationView: MKAnnotationView {
   override var annotation: MKAnnotation? {
@@ -20,24 +22,12 @@ class ClusterAnnotationView: MKAnnotationView {
 extension UIGraphicsImageRenderer {
     static func image(for annotations: [MKAnnotation]?, in rect: CGRect) -> UIImage {
       let renderer = UIGraphicsImageRenderer(size: rect.size)
+      let image = UIImage(named: R.image.mapCluster.name) ?? UIImage()
 
       return renderer.image { _ in
-          // Draw circular background
-          let bounds = CGRect(origin: .zero, size: rect.size)
-          let circlePath = UIBezierPath(ovalIn: bounds)
-          UIColor.systemBlue.setFill()
-          circlePath.fill()
-
-          // Draw inner lighter circle for a subtle ring effect
-          let inset: CGFloat = 3
-          let innerRect = bounds.insetBy(dx: inset, dy: inset)
-          let innerPath = UIBezierPath(ovalIn: innerRect)
-          UIColor.systemBlue.withAlphaComponent(0.85).setFill()
-          innerPath.fill()
-
-          // Draw count
-          if let count = annotations?.count {
-              String(count).drawForCluster(in: rect)
+          image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+          if annotations != nil {
+              String(annotations?.count ?? 0).drawForCluster(in: rect)
           }
       }
     }
@@ -45,10 +35,8 @@ extension UIGraphicsImageRenderer {
 
 extension String {
     func drawForCluster(in rect: CGRect) {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.boldSystemFont(ofSize: 14)
-        ]
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
+                          NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
         let textSize = self.size(withAttributes: attributes)
         let textRect = CGRect(x: (rect.width / 2) - (textSize.width / 2),
                               y: (rect.height / 2) - (textSize.height / 2),

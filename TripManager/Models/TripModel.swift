@@ -1,12 +1,12 @@
+//
 //  TripModel.swift
 //  TripManager
 //
 //  Created by eric locci on 08/12/2025.
-//
 
 import Foundation
 
-struct TripModel: Equatable {
+struct TripModel: Equatable, Hashable {
   var id: String?
   var city: String
   var activities: [ActivityModel]
@@ -33,7 +33,13 @@ struct TripModel: Equatable {
   }
 
   var cityModel: CityModel {
-    // TO DO: update with real data
-    CityModel.sampleValues[.random(in: (0..<CityModel.sampleValues.count - 1))]
+    let count = CityModel.sampleValues.count
+    if count == 0 { return CityModel.sampleValues.first! }
+    let index = Int.random(in: 0..<count)
+    return CityModel.sampleValues[index]
+  }
+
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id ?? "" + city)
   }
 }

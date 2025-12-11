@@ -1,8 +1,9 @@
-//  TripManagerApp.swift
+//
 //  TripManager
 //
 //  Created by eric locci on 08/12/2025.
 
+import RswiftResources
 import SwiftUI
 
 @main
@@ -12,12 +13,11 @@ struct TripManagerApp: App {
 
   var body: some Scene {
       WindowGroup {
-        MyTripsMapView()
-        /*if onboardingCompleted {
+        if onboardingCompleted {
           MainTabView()
         } else {
           OnboardingScreen()
-        }*/
+        }
       }
   }
 }
