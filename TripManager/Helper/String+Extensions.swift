@@ -10,8 +10,12 @@ import RswiftResources
 
 extension String {
 
-  func textView(style: AppStyles.TextStyles, overrideColor: Color? = nil,
-                multiligneAlignment: TextAlignment = .leading, lineLimit: Int? = nil) -> some View {
+  func textView(
+    style: AppStyles.TextStyles,
+    overrideColor: Color? = nil,
+    multiligneAlignment: TextAlignment = .leading,
+    lineLimit: Int? = nil
+  ) -> some View {
     Text(self)
       .foregroundStyle(overrideColor ?? style.defaultColor)
       .font(style.font)

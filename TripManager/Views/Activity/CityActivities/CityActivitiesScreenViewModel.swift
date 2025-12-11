@@ -25,8 +25,10 @@ import Combine
      }
    }
 
-   init(city: CityModel, values: [ActivityModel] = ActivityModel.sampleValues(),
-        date: Date = Date(), doubleValue: Double? = nil) {
+   init(city: CityModel,
+        values: [ActivityModel] = ActivityModel.sampleValues(),
+        date: Date = Date(),
+        doubleValue: Double? = nil) {
      self.city = city
      self.values = values
      self.date = date

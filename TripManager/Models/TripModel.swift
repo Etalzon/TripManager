@@ -14,19 +14,24 @@ struct TripModel: Equatable, Hashable {
 
   static func sampleValues() -> [TripModel] {
     [
-      TripModel(id: UUID().uuidString, city: CityModel.sampleValues.first?.id ?? "",
+      TripModel(id: UUID().uuidString,
+                city: CityModel.sampleValues.first?.id ?? "",
                 activities: ActivityModel.sampleValues(),
                 date: Date().addingTimeInterval(24 * 60 * 60 * 5)),
-      TripModel(id: UUID().uuidString, city: CityModel.sampleValues.last?.id ?? "",
+      TripModel(id: UUID().uuidString,
+                city: CityModel.sampleValues.last?.id ?? "",
                 activities: ActivityModel.sampleValues(),
                 date: Date()),
-      TripModel(id: UUID().uuidString, city: CityModel.sampleValues.last?.id ?? "",
+      TripModel(id: UUID().uuidString,
+                city: CityModel.sampleValues.last?.id ?? "",
                 activities: ActivityModel.sampleValues(),
                 date: Date().addingTimeInterval(-24 * 60 * 60 * 12)),
-      TripModel(id: UUID().uuidString, city: CityModel.sampleValues.first?.id ?? "",
+      TripModel(id: UUID().uuidString,
+                city: CityModel.sampleValues.first?.id ?? "",
                 activities: ActivityModel.sampleValues(),
                 date: Date().addingTimeInterval(-24 * 60 * 60 * 89)),
-      TripModel(id: UUID().uuidString, city: CityModel.sampleValues.last?.id ?? "",
+      TripModel(id: UUID().uuidString,
+                city: CityModel.sampleValues.last?.id ?? "",
                 activities: ActivityModel.sampleValues(),
                 date: Date().addingTimeInterval(-24 * 60 * 60 * 380))
     ]

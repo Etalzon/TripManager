@@ -46,7 +46,8 @@ class MyTripsMapViewModel: NSObject, MapViewDelegate, CLLocationManagerDelegate 
     didCenterOnSelectedAnnotation = false
     self.selectedAnnotation = selectedAnnotation
     resizeAnnotationViewImage(sizeInPercent: MyTripsMapViewModel.zoomImageIncrease,
-                              mapView: selectedAnnotation, image: item.image)
+                              mapView: selectedAnnotation,
+                              image: item.image)
   }
 
   func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -58,7 +59,8 @@ class MyTripsMapViewModel: NSObject, MapViewDelegate, CLLocationManagerDelegate 
       return
     }
     resizeAnnotationViewImage(sizeInPercent: CGFloat(1) / MyTripsMapViewModel.zoomImageIncrease,
-                              mapView: selectedAnnotation, image: image)
+                              mapView: selectedAnnotation,
+                              image: image)
     didCenterOnSelectedAnnotation = false
     self.selectedAnnotation = nil
     mapView.selectedAnnotations.removeAll()

@@ -1,3 +1,15 @@
+# yaml
+included:
+  - Sources
+  - TripManager
+excluded:
+  - Carthage
+  - Pods
+  - DerivedData
+  - .build
+
+reporter: "xcode"
+# pour renforcer les règles utiles
 opt_in_rules:
   - empty_count
   - explicit_init
@@ -9,19 +21,43 @@ opt_in_rules:
   - attributes
   - operator_usage_whitespace
   - first_where
-#  - object_literal
+  # - object_literal
   - number_separator
   - prohibited_super_call
   - fatal_error_message
-
   - let_var_whitespace
-identifier_name:
-  excluded:
-    - id
-line_length: 190
-number_separator:
-  minimum_length: 5
+  - multiline_arguments
+  - multiline_parameters
+# pour les règles non souhaitées
 disabled_rules:
   - trailing_whitespace
   - object_literal
   - vertical_parameter_alignment_on_call
+
+identifier_name:
+  excluded:
+    - id
+# règles personnalisées
+line_length:
+  warning: 190
+  ignores_comments: true
+  ignores_urls: true
+
+number_separator:
+  minimum_length: 5
+
+type_body_length:
+  warning: 400
+  error: 600
+
+file_length:
+  warning: 600
+  error: 1000
+
+function_body_length:
+  warning: 80
+  error: 120
+
+cyclomatic_complexity:
+  warning: 12
+  error: 20

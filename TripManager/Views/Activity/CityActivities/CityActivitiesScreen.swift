@@ -17,9 +17,12 @@ struct CityActivitiesScreen: View {
     static let headerGradient = LinearGradient(stops: [
       Gradient.Stop(color: Color(R.color.mainBackground.name), location: 0.85),
       Gradient.Stop(color: Color(R.color.mainBackground.name).opacity(0), location: 1.0)
-    ], startPoint: .top, endPoint: .bottom)
+    ], startPoint: .top,
+                                               endPoint: .bottom)
     static let gridItemBottomGradient = LinearGradient(colors: [
-      .black, .black.opacity(0)], startPoint: .bottom, endPoint: .top)
+      .black, .black.opacity(0)],
+                                                       startPoint: .bottom,
+                                                       endPoint: .top)
     static let gridItemBottomHeight: CGFloat = 48
     static let itemSelectionColor = Color.black.opacity(0.5)
     static let itemSelectionIconSize = Font.system(size: 24)
@@ -92,7 +95,8 @@ struct CityActivitiesScreen: View {
         R.string.localizable.cityActivitiesDatePicker().textView(style: .description,
                                                                  overrideColor: Color(R.color.primaryText.name))
       }
-      PriceTextField(currencySymbol: "€", placeholder: R.string.localizable.cityActivitiesPrice(),
+      PriceTextField(currencySymbol: "€",
+                     placeholder: R.string.localizable.cityActivitiesPrice(),
                      value: $viewModel.doubleValue)
         .font(AppStyles.TextStyles.description.font)
         .multilineTextAlignment(.trailing)

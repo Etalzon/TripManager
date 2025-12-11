@@ -274,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# /bin/sh\n# SwiftLint Run Script (Xcode > Build Phases)\n\n# Ajoute Homebrew au PATH si présent\nif test -d '/opt/homebrew/bin/'; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nelif test -d '/usr/local/bin/'; then\n  PATH=\"/usr/local/bin/:${PATH}\"\nfi\nexport PATH\n\nif which swiftlint >/dev/null; then\n  # Auto‑correction des règles correctables\n  swiftlint autocorrect --format\n  # Lancement de l’analyse (utilise la config dans '.swiftlint.yml')\n  swiftlint\nelse\n  echo \"warning: SwiftLint n'est pas installé (brew install swiftlint)\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

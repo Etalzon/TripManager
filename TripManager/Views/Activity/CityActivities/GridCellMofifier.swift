@@ -20,16 +20,18 @@ struct GridCellModifier: ViewModifier {
       .frame(height: GridCellModifier.gridSquareHeight(availableFullWidth: width))
   }
 
-  static func gridSquareHeight(availableFullWidth: CGFloat, totalColumns: Int = 2,
-                               spacing: CGFloat = AppStyles.Padding.small16.rawValue) -> CGFloat {
+  static func gridSquareHeight(
+    availableFullWidth: CGFloat,
+    totalColumns: Int = 2,
+    spacing: CGFloat = AppStyles.Padding.small16.rawValue
+  ) -> CGFloat {
     let formattedColumns = CGFloat(totalColumns)
-    return (availableFullWidth -
-             (2 + formattedColumns - 1) * spacing) / formattedColumns
-   }
+    return (availableFullWidth - (2 + formattedColumns - 1) * spacing) / formattedColumns
+  }
 }
 
 extension View {
-    func gridCellmodifier(width: CGFloat) -> ModifiedContent<Self, GridCellModifier> {
-      return self.modifier(GridCellModifier(width: width))
-    }
+  func gridCellModifier(width: CGFloat) -> ModifiedContent<Self, GridCellModifier> {
+    modifier(GridCellModifier(width: width))
+  }
 }

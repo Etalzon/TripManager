@@ -83,7 +83,8 @@ struct MyTripsMapView: View {
   func selectedAnnotationView(_ mapItem: MapItem) -> some View {
     VStack {
       mapItem.item.name.textView(style: .title, multiligneAlignment: .center)
-      PriceTextField(currencySymbol: "€", placeholder: R.string.localizable.cityActivitiesPrice(),
+      PriceTextField(currencySymbol: "€",
+                     placeholder: R.string.localizable.cityActivitiesPrice(),
                      value: .constant(mapItem.item.price))
         .font(AppStyles.TextStyles.description.font)
         .multilineTextAlignment(.trailing)
