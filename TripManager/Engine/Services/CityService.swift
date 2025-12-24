@@ -1,8 +1,7 @@
-//
 //  CityService.swift
 //  TripManager
 //
-//  Created by thomas lacan on 07/08/2024.
+//  Created by eric locci on 24/12/2025.
 //
 
 protocol CityService {

@@ -15,9 +15,6 @@ struct TripManagerApp: App {
       WindowGroup {
         if onboardingCompleted {
           MainTabView()
-            .onAppear {
-              CityModel.encodeTestJSON()
-            }
         } else {
           OnboardingScreen()
         }
