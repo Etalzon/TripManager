@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		33412EC12EE718ED0042046A /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 33412EC02EE718ED0042046A /* RswiftLibrary */; };
+		3352CC0E2F0C1CC9002FCFF4 /* SwiftEntryKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3352CC0D2F0C1CC9002FCFF4 /* SwiftEntryKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3352CC0E2F0C1CC9002FCFF4 /* SwiftEntryKit in Frameworks */,
 				33412EC12EE718ED0042046A /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +135,7 @@
 			name = TripManager;
 			packageProductDependencies = (
 				33412EC02EE718ED0042046A /* RswiftLibrary */,
+				3352CC0D2F0C1CC9002FCFF4 /* SwiftEntryKit */,
 			);
 			productName = TripManager;
 			productReference = 33412E942EE70D600042046A /* TripManager.app */;
@@ -219,6 +222,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				33412EBF2EE718ED0042046A /* XCRemoteSwiftPackageReference "R" */,
+				3352CC0C2F0C1CC9002FCFF4 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 33412E952EE70D600042046A /* Products */;
@@ -457,9 +461,9 @@
 				INFOPLIST_FILE = TripManager/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TripManager;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need to user user location to find activities near by";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,9 +500,9 @@
 				INFOPLIST_FILE = TripManager/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TripManager;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need to user user location to find activities near by";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -655,6 +659,14 @@
 				minimumVersion = 7.8.0;
 			};
 		};
+		3352CC0C2F0C1CC9002FCFF4 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huri000/SwiftEntryKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -667,6 +679,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33412EBF2EE718ED0042046A /* XCRemoteSwiftPackageReference "R" */;
 			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		3352CC0D2F0C1CC9002FCFF4 /* SwiftEntryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3352CC0C2F0C1CC9002FCFF4 /* XCRemoteSwiftPackageReference "SwiftEntryKit" */;
+			productName = SwiftEntryKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

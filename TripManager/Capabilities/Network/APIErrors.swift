@@ -2,10 +2,10 @@
 //  TripManager
 //
 //  Created by eric locci on 22/12/2025.
-
+import RswiftResources
 import Foundation
 
-public enum APIError: Error {
+public enum APIError: Error, LocalizedError {
   case urlError
   case noNetwork
   case decodingError(decodingError: Error)
@@ -21,5 +21,22 @@ public enum APIError: Error {
       return .noNetwork
     }
     return .other(error: error)
+  }
+
+  public var localizedDescription: String? {
+    switch self {
+    case .urlError:
+      return R.string.localizable.apiErrorUrlError()
+    case .noNetwork:
+      return R.string.localizable.apiErrorNoNetwork()
+    case .decodingError(let decodingError):
+      return R.string.localizable.apiErrorDecodingError(decodingError.localizedDescription)
+    case .serverError(let statusCode):
+      return R.string.localizable.apiErrorServerError("\(statusCode)")
+    case .unknownError:
+      return R.string.localizable.apiErrorUnknownError()
+    case .other(let error):
+      return R.string.localizable.apiErrorOther(error?.localizedDescription ?? "")
+    }
   }
 }

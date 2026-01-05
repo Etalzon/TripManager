@@ -1,4 +1,3 @@
-//
 //  OnboardingScreen.swift
 //  TripManager
 //

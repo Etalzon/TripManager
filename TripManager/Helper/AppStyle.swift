@@ -44,6 +44,14 @@ struct AppStyles {
       }
     }
 
+    var uiFont: UIFont? {
+       switch self {
+       case .title, .sectionTitle, .navigationTitle: return UIFont(name: R.font.avenirNextBold.name, size: size)!
+       case .buttonCTA, .navigationAction: return UIFont(name: R.font.avenirNextDemiBold.name, size: size)
+       case .description: return UIFont(name: R.font.avenirNextRegular.name, size: size)
+       }
+     }
+
     var defaultColor: Color {
       switch self {
       case .title, .sectionTitle, .navigationTitle: return Color(R.color.primaryText)

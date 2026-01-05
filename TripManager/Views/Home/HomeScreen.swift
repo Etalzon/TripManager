@@ -1,4 +1,3 @@
-//
 //  HomeScreen.swift
 //  TripManager
 //
@@ -15,7 +14,9 @@ struct HomeScreen: View {
     static let cityCornerSize = CGSize(width: 20, height: 10)
   }
 
-  @State private var values = CityModel.sampleValues
+  let engine: Engine
+
+  @State private var values: [CityModel] = []
   @State private var searchText = ""
   @State private var cityDestination: CityModel?
 
@@ -50,6 +51,24 @@ struct HomeScreen: View {
                 ContentUnavailableView.search
             }
         }
+        .onAppear {
+         Task { @MainActor in
+           EntryKitViewDisplayer.showLoader()
+           try? await Task.sleep(nanoseconds: 3_000_000_000)
+           EntryKitViewDisplayer.hideLoader()
+         }
+       }
+        .task {
+          let apiResult = await engine.cityService.cities()
+          switch apiResult {
+          case .success(let cities):
+            Task { @MainActor in
+              self.values = cities
+            }
+          case .failure(let error):
+             print(error.localizedDescription ?? "Erreur inconnue")
+          }
+        }
       }
   }
 
@@ -57,14 +76,22 @@ struct HomeScreen: View {
   func cityCell(_ city: CityModel) -> some View {
     AsyncImage(url: URL(string: city.image)) { image in
       ZStack(alignment: .bottomLeading) {
-        image
-          .resizable()
-          .scaledToFill()
-          .frame(height: ViewStyles.cityCellHeight)
-        ViewStyles.cellBottomColor
-          .frame(height: ViewStyles.cityCellBottomHeight)
-        city.name.textView(style: .sectionTitle)
-          .offset(x: ViewStyles.cityCellBottomHeight, y: -AppStyles.Padding.verySmall8.rawValue)
+        GeometryReader { geo in
+          image
+            .resizable()
+            .scaledToFill()
+            .frame(width: geo.size.width, height: ViewStyles.cityCellHeight)
+            .clipped()
+          VStack {
+            Spacer()
+            ZStack(alignment: .bottomLeading) {
+              ViewStyles.cellBottomColor
+                .frame(height: ViewStyles.cityCellBottomHeight)
+              city.name.textView(style: .sectionTitle)
+                .offset(x: AppStyles.Padding.small16.rawValue, y: -AppStyles.Padding.verySmall8.rawValue)
+            }
+          }
+        }
       }
         .clipShape(RoundedRectangle(cornerSize: ViewStyles.cityCornerSize))
         .frame(height: ViewStyles.cityCellHeight)
@@ -78,5 +105,5 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen()
+  HomeScreen(engine: Engine(mock: true))
 }

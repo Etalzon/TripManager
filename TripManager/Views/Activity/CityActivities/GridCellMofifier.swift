@@ -1,4 +1,3 @@
-//
 //  GridCellModifier.swift
 //  TripManager
 //

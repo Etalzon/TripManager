@@ -1,5 +1,5 @@
 {
-  "originHash" : "3f797a71b87fce69536b62c831f85bae56f7b008e9c31f46397ea1435366b56c",
+  "originHash" : "a0d23a81c6662ee5bafc3be451974d8abb8f2473e7e9009dbf14ad946f3d68b5",
   "pins" : [
     {
       "identity" : "r.swift",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "cdd0ef3755280949551dc26dee5de9ddeda89f54",
         "version" : "1.6.2"
+      }
+    },
+    {
+      "identity" : "swiftentrykit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/huri000/SwiftEntryKit.git",
+      "state" : {
+        "revision" : "5ad36cccf0c4b9fea32f4e9b17a8e38f07563ef0",
+        "version" : "2.0.0"
       }
     },
     {

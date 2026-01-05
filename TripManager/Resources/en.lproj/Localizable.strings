@@ -1,33 +1,44 @@
-/* 
-  Localizable.strings
-  TripManager
-
-  Created by eric locci on 08/12/2025.
-  
+/* Localizable.strings
+   TripManager
+   Created by eric locci on 08/12/2025.
+   English (en)
 */
 
-"tab.home" = "Discovery";
-"tab.mytrips" = "My Trips";
+"apiError.decodingError" = "Data decoding error. The response data could not be interpreted correctly. %@";
+"apiError.noNetwork" = "No network connection. Please check your internet connection and try again.";
+"apiError.other" = "An error occurred. Additional details: %@";
+"apiError.serverError" = "Server error. The server returned a status code of %@.";
+"apiError.unknownError" = "Unknown error occurred. An unexpected issue has been encountered.";
+"apiError.urlError" = "Invalid URL. The requested URL is not properly formatted or is missing.";
+
+"cityActivities.button.create" = "Create";
+"cityActivities.date.picker" = "Select a date";
+"cityActivities.price" = "Total price for the day";
+"cityActivities.title" = "Create Trip";
+
+"error.image.unavailable" = "Unavailable";
+
+"loader.description" = "Loading...";
+
+"myTrips.future.section.empty" = "No trips scheduled";
+"myTrips.future.section.title" = "Future Trips";
+"myTrips.past.section.empty" = "No past trips";
+"myTrips.past.section.title" = "Past Trips";
+"myTrips.title" = "My Trips";
+
 "onboarding.button.next" = "Next";
 "onboarding.button.skip" = "Skip";
 "onboarding.button.start" = "Start";
 "onboarding.step.1.description" = "Manage your holidays with DimaTrip";
 "onboarding.step.1.title" = "Discover";
-"onboarding.step.2.description" = "Select destinations and start scheduling 
-details for your trip.";
+"onboarding.step.2.description" = "Select destinations and start scheduling\ndetails for your trip.";
 "onboarding.step.2.title" = "Plan your trip";
 "onboarding.step.3.description" = "Enjoy! Relax and chilling memories.";
 "onboarding.step.3.title" = "Start your adventure";
-"text.sample.description" = "Text sample";
-"text.sample.n.quantity|==|plural.one" = "Text complex %d element";
-"text.sample.n.quantity|==|plural.other" = "Text complex %d elements";
-"error.image.unavailable" = "Image unavailable";
-"cityActivities.date.picker" = "Select date";
-"cityActivities.price" = "Total price for the day";
-"cityActivities.title" = "Create Trip";
-"cityActivities.button.create" = "Create";
-"myTrips.title" = "My Trips";
-"myTrips.past.section.title" = "Past Trips";
-"myTrips.future.section.title" = "Future Trips";
-"myTrips.future.section.empty" = "No trips scheduled";
-"myTrips.past.section.empty" = "No past trips";
+
+"tab.home" = "Discovery";
+"tab.myTrips" = "My Trips";
+
+"text.sample.simple" = "Text sample";
+/* Plurals in .stringsdict; provide a fallback here if desired */
+"text.sample.n.quantity" = "Text complex %d elements";

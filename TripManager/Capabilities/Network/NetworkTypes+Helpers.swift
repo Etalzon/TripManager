@@ -6,7 +6,7 @@
 import Foundation
 
 enum Server: String {
-  case dev = "http://localhost:80/"
+  case dev = "http://localhost:3000/"
 }
 
 typealias APIResponse<T: Decodable> = Result<T, APIError>
