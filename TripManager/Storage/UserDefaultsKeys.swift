@@ -1,4 +1,3 @@
-//
 //  UserDefaultsKeys.swift
 //  TripManager
 //
@@ -7,5 +6,5 @@
 import Foundation
 
 enum UserDefaultsKeys: String {
-  case onboardingCompleted
+   case onboardingCompleted
 }

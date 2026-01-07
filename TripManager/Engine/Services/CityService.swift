@@ -2,7 +2,6 @@
 //  TripManager
 //
 //  Created by eric locci on 24/12/2025.
-//
 
 protocol CityService {
   func cities() async -> APIResponse<[CityModel]>
@@ -16,7 +15,8 @@ final class CityServiceNetwork: CityService {
   }
 
   func cities() async -> APIResponse<[CityModel]> {
-    await networkClient.call(endPoint: .cities)
+    // Utilise l'API async du NetworkClient pour éviter toute continuation manuelle
+    await networkClient.call(endPoint: APIEndPoint.cities) as APIResponse<[CityModel]>
   }
 }
 

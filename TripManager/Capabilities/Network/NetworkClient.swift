@@ -1,3 +1,4 @@
+// swift
 //  NetworkClient.swift
 //  TripManager
 //
@@ -100,56 +101,66 @@ final class NetworkClient {
 
   @discardableResult
   func call<T>(endPoint: APIEndPoint,
-                        onDone: @escaping (APIResponse<T>) -> Void,
-                        dict: [String: Any?]? = nil,
-                        urlDict: [String: Any?]? = nil,
-                        additionalHeaders: [String: String]? = nil,
-                        timeout: TimeInterval = 60) -> URLSessionDataTask? {
-      guard var url = url(endPoint: endPoint) else {
-        onDone(.failure(APIError.urlError))
-        return nil
-      }
-      if let urlDict {
-        url = NetworkClient.urlFor(url: url, urlDict: urlDict)
-      }
-
-      var request = URLRequest(url: url)
-      request.httpMethod = endpointMapperClass.method(for: endPoint).rawValue
-      request.httpBody = dict != nil ? try? JSONSerialization.data(withJSONObject: dict ?? [:], options: []) : nil
-      request.timeoutInterval = timeout
-      request.allHTTPHeaderFields = NetworkClient.defaultHeaders.merging(additionalHeaders ?? [:]) { _, new in new }
-
-      return call(request: request, onDone: onDone)
+               onDone: @escaping (APIResponse<T>) -> Void,
+               dict: [String: Any?]? = nil,
+               urlDict: [String: Any?]? = nil,
+               additionalHeaders: [String: String]? = nil,
+               timeout: TimeInterval = 60) -> URLSessionDataTask? {
+    guard var url = url(endPoint: endPoint) else {
+      onDone(.failure(APIError.urlError))
+      return nil
+    }
+    if let urlDict {
+      url = NetworkClient.urlFor(url: url, urlDict: urlDict)
     }
 
-    @discardableResult
-    func call<T: Decodable>(request: URLRequest,
-                            onDone: @escaping (APIResponse<T>) -> Void) -> URLSessionDataTask {
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-              onDone(.failure(APIError.other(error: error)))
-                return
-            }
+    var request = URLRequest(url: url)
+    request.httpMethod = endpointMapperClass.method(for: endPoint).rawValue
+    request.httpBody = dict != nil ? try? JSONSerialization.data(withJSONObject: dict ?? [:], options: []) : nil
+    request.timeoutInterval = timeout
+    request.allHTTPHeaderFields = NetworkClient.defaultHeaders.merging(additionalHeaders ?? [:]) { _, new in new }
 
-            guard let httpResponse = response as? HTTPURLResponse else {
-                onDone(.failure(APIError.unknownError))
-                return
-            }
+    return call(request: request, onDone: onDone)
+  }
 
-            NetworkClient.logRequest(request: request, urlResponse: httpResponse, data: data)
+  @discardableResult
+  func call<T: Decodable>(request: URLRequest,
+                          onDone: @escaping (APIResponse<T>) -> Void) -> URLSessionDataTask {
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+      // Gestion d'erreur réseau
+      if let error {
+        onDone(.failure(APIError.other(error: error)))
+        return
+      }
 
-            if (200...299).contains(httpResponse.statusCode) {
-                do {
-                    let decodedObject = try NetworkClient.defaultDecoder.decode(T.self, from: data)
-                    onDone(.success(decodedObject))
-                } catch let error {
-                    print("[DECODING ERROR] \(error.localizedDescription)")
-                  onDone(.failure(.decodingError(decodingError: error)))
-                }
-            }
-            onDone(.failure(.serverError(statusCode: httpResponse.statusCode)))
+      guard let data = data else {
+        onDone(.failure(APIError.unknownError))
+        return
+      }
+
+      guard let httpResponse = response as? HTTPURLResponse else {
+        onDone(.failure(APIError.unknownError))
+        return
+      }
+
+      NetworkClient.logRequest(request: request, urlResponse: httpResponse, data: data)
+
+      if (200...299).contains(httpResponse.statusCode) {
+        do {
+          let decodedObject = try NetworkClient.defaultDecoder.decode(T.self, from: data)
+          onDone(.success(decodedObject))
+          return
+        } catch let error {
+          print("[DECODING ERROR] \(error.localizedDescription)")
+          onDone(.failure(.decodingError(decodingError: error)))
+          return
         }
-        task.resume()
-        return task
+      }
+
+      onDone(.failure(.serverError(statusCode: httpResponse.statusCode)))
+      return
     }
+    task.resume()
+    return task
+  }
 }

@@ -52,12 +52,12 @@ struct HomeScreen: View {
             }
         }
         .onAppear {
-         Task { @MainActor in
-           EntryKitViewDisplayer.showLoader()
-           try? await Task.sleep(nanoseconds: 3_000_000_000)
-           EntryKitViewDisplayer.hideLoader()
-         }
-       }
+          Task { @MainActor in
+            EntryKitViewDisplayer.showLoader()
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            EntryKitViewDisplayer.hideLoader()
+          }
+        }
         .task {
           let apiResult = await engine.cityService.cities()
           switch apiResult {
@@ -66,7 +66,7 @@ struct HomeScreen: View {
               self.values = cities
             }
           case .failure(let error):
-             print(error.localizedDescription ?? "Erreur inconnue")
+             print(error.localizedDescription ?? "Unknown error")
           }
         }
       }
